@@ -1,0 +1,308 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Wemakeprice-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+body{
+    width: 100%;
+    background-repeat:no-repeat;
+    margin: 2% 0%;
+}
+
+
+.menu{
+    font-family: 'Wemakeprice-Bold';
+    text-align: right;
+    font-size: 25px;
+    color: black;
+    font-weight: 800;
+}
+
+.menu ul li{
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.BGF {
+    font-family: 'Wemakeprice-Bold';
+    text-align: center;
+    font-size: 65px;
+    font-weight: bold;
+    padding: 5% 0;
+    text-decoration: none;
+    color: black;
+}
+
+
+  
+/* ///////////////////////////////////////////////////////////////////////////// */
+/*///////////////// 주요 주식, 코인 실시간. css ////////////////////*/
+
+
+.totalpart{
+    width:950px;
+    margin: 0 auto;
+}
+.stockcontainer{
+    display: inline-block;
+    margin-right: 30px;
+}
+.coincontainer{
+    display: inline-block;
+}
+.subject{
+    font-family: 'Wemakeprice-Bold';
+    font-size: 20px;
+    width: 300px;
+    margin: 0 auto;;
+    text-align: center;
+
+}
+.item1{
+    font-size: 15px;
+}
+.buycontainer{
+    font-size: 20px;
+    text-align: center;
+    border: 4px solid red;
+    width: 150px;
+    margin: 15px auto 0 auto;
+    padding: 10px 0 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+    transition: 0.3s;
+}
+.buycontainer:hover{
+    -webkit-transform: scale(1.1,1.1);
+    -moz-transform: scale(1.1,1.1);
+    -o-transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    transform: scale(1.1,1.1);
+}
+
+.buycontainer a{
+    text-decoration: none;
+    color: black;
+}
+
+table{
+    border-spacing: 2px;
+}
+
+thead tr td{    
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+tbody tr td{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} 
+/* /////////// 반짝거림 /////// */
+.redrate{
+    color: red;
+}
+.blinking{ 
+    -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
+    -moz-animation:blink 1.5s ease-in-out infinite alternate; 
+    animation:blink 1.5s ease-in-out infinite alternate; 
+    } 
+
+    @-webkit-keyframes blink{ 
+        0% {opacity:0;} 100% {opacity:1;} 
+    } 
+    @-moz-keyframes blink{ 
+        0% {opacity:0;} 100% {opacity:1;} 
+    } 
+    @keyframes blink{ 
+        0% {opacity:0;} 100% {opacity:1;} 
+    }
+
+    /* .blinking2{ 
+        -webkit-animation:blink 2.0s ease-in-out infinite alternate; 
+        -moz-animation:blink 2.0s ease-in-out infinite alternate; 
+        animation:blink 2.0s ease-in-out infinite alternate; 
+        } 
+    
+        @-webkit-keyframes blink{ 
+            0% {opacity:0;} 100% {opacity:1;} 
+        } 
+        @-moz-keyframes blink{ 
+            0% {opacity:0;} 100% {opacity:1;} 
+        } 
+        @keyframes blink{ 
+            0% {opacity:0;} 100% {opacity:1;} 
+        } */
+
+/* ///////////////////////////////////////////////////////////////////////////// */
+/*/////////////////////////////////// 인기글 CSS //////////////////////////////////*/
+.container2 {
+   margin: 0 auto;
+   width:800px;
+   height: 400px;
+  display: grid;
+  grid-template-rows: repeat(15,1fr);
+  grid-template-columns: repeat(20,1fr);
+}
+.box{
+    display: grid;
+    grid-template-rows: repeat(15,1fr);
+    grid-template-columns: repeat(20,1fr);
+    grid-column-start: 1;
+    grid-column-end: 10;
+    grid-row-start:3;
+    grid-row-end: 15;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px grey;
+}
+.stock_manyhits{
+    grid-column-start: 1;
+    grid-column-end: 21;
+    grid-row-start:3;
+    grid-row-end: 15;
+    text-align: center;
+    font-family: 'Wemakeprice-Bold';
+    font-size: 20px;
+}
+.stock_title{
+    grid-column-start: 2;
+    grid-column-end: 13;
+    grid-row-start:5;
+    grid-row-end: 6;
+    border-bottom: 2px solid black;
+    text-align: left;
+}
+.stock_hit{
+    grid-column-start: 13;
+    grid-column-end: 18;
+    grid-row-start:5;
+    grid-row-end: 5;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.stock_titlelist{
+    grid-column-start: 5;
+    grid-column-end: 10;
+    grid-row-start:9;
+    grid-row-end: 15;
+    text-align: left;
+    padding-bottom: 5px;
+
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+    transition: 0.3s;
+}
+.stock_titlelist:hover{
+    -webkit-transform: scale(1.1,1.1);
+    -moz-transform: scale(1.1,1.1);
+    -o-transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    transform: scale(1.1,1.1);
+}
+.stock_hitlist{
+    grid-column-start: 15;
+    grid-column-end: 17;
+    grid-row-start:9;
+    grid-row-end: 15;
+    text-align: left;
+    padding-bottom: 5px;
+}
+.square{
+    display: grid;
+    grid-template-rows: repeat(15,1fr);
+    grid-template-columns: repeat(20,1fr);
+    grid-column-start: 12;
+    grid-column-end: 21;
+    grid-row-start:3;
+    grid-row-end: 15;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px grey;
+}
+.coin_manyhits{
+    grid-column-start: 1;
+    grid-column-end: 21;
+    grid-row-start:3;
+    grid-row-end: 15;
+    text-align: center;
+    font-family: 'Wemakeprice-Bold';
+    font-size: 20px;
+}
+
+.coin_title{
+    grid-column-start: 2;
+    grid-column-end: 13;
+    grid-row-start:5;
+    grid-row-end: 6;
+    text-align: left;
+    border-bottom: 2px solid black;
+}
+.coin_hit{
+    grid-column-start: 13;
+    grid-column-end: 18;
+    grid-row-start:5;
+    grid-row-end: 5;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.coin_titlelist{
+    grid-column-start: 2;
+    grid-column-end: 10;
+    grid-row-start:7;
+    grid-row-end: 15;
+    text-align: center;
+}
+.container7{
+    display: inline-block;
+    grid-column-start:15;
+    grid-column-end: 21;
+    grid-row-start:7;
+    grid-row-end: 15;
+}
+.container8{
+    display: inline-block;
+    grid-column-start: 2;
+    grid-column-end: 21;
+    grid-row-start:7;
+    grid-row-end: 15;
+}
+.container8 a{
+    text-decoration: none;
+    color: black;
+}
+/* ///////////////////////////////////////////////// */
+.container3{
+    width: 600px;
+    height: 320px;
+    margin:0 auto;
+ text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px grey;
+  overflow: hidden;
+}
+
+
+
+

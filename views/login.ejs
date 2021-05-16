@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="/stylesheets/mainfont.css">
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+ <style>
+   #body-panel{
+       margin-top: 10%;
+       text-align: center;
+       height: 300px;
+   }
+
+     .login-title{
+         font-family: 'Wemakeprice-Bold';
+         font-size: 30px;
+         color: black;     
+         padding-bottom: 10%;
+    }
+
+     .loginhome{
+        font-family: 'Wemakeprice-Bold';
+            text-decoration: none;
+            color: black;
+            font-size: 35px;
+     }
+ 
+   
+
+     button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  margin: 0;
+  padding: 0.5rem 1rem;
+
+  font-family: 'Wemakeprice-Bold';
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+  width: auto;
+
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+}
+#input-id{
+    height: 30px;
+    margin-bottom: 1%;
+    font-size: 20px;
+}
+#input-pwd{
+    height: 30px;
+    font-size: 20px;
+}
+.potal{
+    margin-top: %;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 15px;
+}
+.potal1{
+    display: inline-block;
+    color: grey;
+    text-decoration: none;
+  
+}
+.potalform{
+    padding-bottom: 5%;
+}
+ </style>
+ 
+ 
+
+
+</head>
+<body>
+    <div ><a href="/" class="loginhome">BG</a></div>
+                <div id="body-panel">
+                    <div class="login-form-panel">
+                        <div class="login-title">로그인</div>
+                        <div class="form-input">
+                            <form method="POST" action="/login" name="loginForm">
+                                <div id='lopgin-form'>
+                                    <div class="input-panel">
+                                        <div id="inpid"><input id="input-id" name="userid" type="text" placeholder="ID"autofocus></div>
+                                        <div id="inppwd"><input  id="input-pwd" name="userpwd" type="password"placeholder="PASSWORD"></div>
+                                    </div>
+                                    <button id="login"  class="submit" onclick="login()">enter</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="potalform">
+                    <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+                    <div id="naver_id_login"></div>
+                <div class="potal">아직 회원이 아니신가요?</div>
+                <div class="potal1"><a href="/signup" rel="modal:open"class="potal1" >회원가입</a></div>
+                </div>
+
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+ 
+  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("nKchet6OefUFsmvOjV42", "http://byeonggoon.cafe24app.com/naver_oauth");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://byeonggoon.cafe24app.com/");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  </script>
+
+</body>
+</html>

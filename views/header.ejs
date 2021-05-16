@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Wemakeprice-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+body{
+    width: 90%;
+    background-repeat:no-repeat;
+    margin: 2% 5%;
+}
+
+
+.menu{
+    font-family: 'Wemakeprice-Bold';
+    text-align: right;
+    font-size: 25px;
+    color: black;
+    font-weight: 800;
+}
+
+.menu ul li{
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.BGF {
+    font-family: 'Wemakeprice-Bold';
+    text-align: center;
+    font-size: 65px;
+    font-weight: bold;
+    padding: 5% 0;
+    text-decoration: none;
+    color: black;
+}
+    </style>
+</head>
+<body>
+    <div class="body">
+        
+        <div class="menu">
+            <ul>
+                <li><a href="/stock/1">주식게시판</a></li>
+                <li><a href="/coin/1">코인게시판</a></li>
+                <%if(data==undefined){%>
+                    <li><a href="/login" rel="modal:open">로그인</a></li>
+                    <li><a href="/signup" rel="modal:open">회원가입</a></li>
+                    <%}else{%>
+                        <li><a href="/mypage">
+                                <%=data%>님
+                            </a></li>
+                        <li><a href="/logout">logout</a></li>
+                        <%}%>
+            </ul>
+        </div>
+        <div class="BGF">BGFinance</div>
+    </div>
+</body>
+</html>

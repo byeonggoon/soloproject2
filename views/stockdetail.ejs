@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 글보기</title>
+    <link rel="stylesheet" href="/stylesheets/mainfont.css">
+
+    <script type="text/javascript" src="/javascripts/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <style>
+        /* //////////////////기본정렬 및 헤더///////////////// */
+ 
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    width: 90%;
+    background-repeat:no-repeat;
+    margin: 2% 5%;
+}
+
+.menu {
+    font-family: 'Wemakeprice-Bold';
+    text-align: right;
+    font-size: 25px;
+    color: black;
+    font-weight: 800;
+}
+
+.menu ul li {
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.BGF {
+    font-family: 'Wemakeprice-Bold';
+    text-align: center;
+    font-size: 65px;
+    font-weight: bold;
+    padding: 5% 0;
+    text-decoration: none;
+    color: black;
+}
+
+/* /////////////////////////////////////// */
+.stock-stockno {
+            display: inline-block;
+            font-size: 15px;
+        }
+        #DN{
+            display: inline-block;
+            font-size: 15px;
+        }
+        .stock-userid{
+            display: inline-block;
+            float: right;
+            font-size: 15px;
+        }
+        .stock-detail-panel {
+            width: 800px;
+            margin: auto;
+            vertical-align: middle;
+            border: 1px solid black;
+            padding: 15px;
+            margin-bottom: 2%;
+       
+            border-radius: 10px;
+        }
+        .stock-title{
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Wemakeprice-Bold';
+        }
+        .stock-date{
+            font-size: 15px;
+            margin-bottom: 2%;
+        }
+        .stock-content{
+            font-size: 20px;
+            font-family: 'JSDongkang-Regular';
+            padding: 3% 5%;
+        }
+    
+        .buttons {
+            text-align: center;
+        }
+    
+        .button {
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 15px;
+            color: rgb(12, 12, 12);
+        }
+    
+        .button:hover {
+            font-weight: bold;
+        }
+    
+        #adcom,
+        #reply {
+            vertical-align: middle;
+            font-size: 20px;
+        }
+
+    
+        .adreply {
+            color: white;
+        }
+        
+    
+        textarea {
+            width: 450px;
+            height: 30px;
+            resize: none;
+            border-top: white;
+            border-left: white;
+            border-right: white;
+        }
+        textarea:focus {
+    outline: none;
+}
+    
+        .commentarea {
+            width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+        .commentarea-re {
+            font-family: 'JSDongkang-Regular';
+           font-size: 20px;
+        }
+        .re-content{
+            float: left;
+            padding-right: 20%;
+            width: 40%;
+            word-break:break-all;
+        }
+    
+        hr{
+            width: 90%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="body">
+        
+        <div class="menu">
+            <ul>
+                <li><a href="/stock/1">주식게시판</a></li>
+                <li><a href="/coin/1">코인게시판</a></li>
+                <%if(user==undefined){%>
+    
+                    <li><a href="/login" rel="modal:open">로그인</a></li>
+                    <li><a href="/signup" rel="modal:open">회원가입</a></li>
+    
+                    <%}else{%>
+                        <li><a href="/mypage">
+                                <%=user%>님
+                            </a></li>
+                        <li><a href="/logout">logout</a></li>
+                        <%}%>
+            </ul>
+        </div>
+
+    <div class="BGF"><a href="/" class="BGF">BGFinance</a></div>
+
+    <div class="stock-detail-panel">
+        <!-- <form name="deletecon" method="post"> -->
+        <% data.forEach((item,index)=>{ %> 
+            <div class="stock-title"><%=item.stocktitle%>
+            </div>
+            <div class="stock-stockno">No :</div> <div id="DN"><%=data[0].no%>
+            </div>
+            <div class="stock-userid">작성자 : <%=item.userid%>
+            </div>
+            <div class="stock-date">작성일 : <%=item.date%>
+            </div>
+            <hr>
+            <% if(item.imageurl == undefined){ %> 
+                <div></div>
+            <% }else{ %>
+                <img src="/images/resize/<%= item.imageurl%>">
+                <%}%> 
+              
+            <div class="stock-content" id="article"><br> <%=item.stockcontent%>
+            </div>
+            
+            <% if(user == item.userid) {%> 
+                <div onclick="deleteboard()" class="button">삭제</div>
+                <div onclick="updateboard()" class="button">수정 </div>
+                <% }else {%>
+                    <div></div>
+                    <% } %> 
+                    <% }) %>
+    </div>
+
+    <div class="commentarea">
+    <!-- 댓글달기 -->
+    <form name="reForm" method="POST">
+        <% if(user == undefined) {%>
+            <textarea name="adcomment" id="adcom" cols="50" rows="5" placeholder="로그인 후 이용가능"></textarea>
+            <div href="/" class="button" id="reply">댓글달기</div>
+            <% }else {%>
+                <textarea name="adcomment" id="adcom" cols="50" rows="5"></textarea>
+                <div onclick="reply()" class="button" id="reply">댓글달기</div>
+                <% } %> 
+    </form>
+    <br>
+    <!-- 댓글보기 -->
+    <% data2.forEach((item,index)=>{ %> 
+        <div class="commentarea-re">
+            <div class="re-content" >- <%= item.comcontent %>
+            </div>
+            <div class="re-userid">작성자 : <%=item.userid %>
+            </div>
+        </div>
+        <hr align="left" >
+    <% }) %>
+</div>
+
+
+    <script>
+        const string = document.getElementById('article').textContent;
+        document.getElementById('article').innerHTML=string;
+    </script>
+        <script>
+
+            //삭제
+            function deleteboard(){ 
+                console.log('here?')
+                let cont = confirm('삭제하시겠습니까?')
+                if(cont==true){
+                    const noTex = document.getElementById('DN').innerText
+                    //stock-stockno안에 내용을 가져와서
+                    //5번째 열부터 끝까지 가져온 것은 no이라 하고 
+                    location.href = '/stock/delete/'+noTex;
+                    //버튼을 눌렀을때 js파일에 post를받는게 실행
+                   
+                }
+            }
+
+            //수정
+            function updateboard(){
+                let con = confirm('수정하시겠습니까')
+                if(con ==true){
+                    const noText = document.getElementById('DN').innerText
+                    //stock-stockno안에 내용을 가져와서
+                   
+                    //stock-stockno안에 내용을 가져와서
+                    // const no = noText.substring(5);
+                    location.href = '/stock/update/'+noText;
+                    // deletecon.submit();
+                }
+            }
+
+            //댓글달기
+            function reply(){
+                let con = confirm('작성된 댓글은 삭제, 수정이 불가능합니다.');
+                if(con == true){
+                    const noText = document.getElementById('DN').innerText
+                    reForm.action = "/stock/detail/"+noText;
+                    reForm.submit();
+                }
+            }
+        </script>
+  
+
+      
+</body>
+
+</html>

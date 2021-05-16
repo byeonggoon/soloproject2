@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="/stylesheets/mainfont.css">
+
+    <style>
+        #body {
+            text-align: center;
+        }
+    
+        .signup-title {
+            font-family: 'Wemakeprice-Bold';
+         font-size: 30px;
+         color: black;     
+         padding-bottom: 10%;
+        }
+    
+        .signuphome {
+            font-family: 'Wemakeprice-Bold';
+            text-decoration: none;
+            color: black;
+            font-size: 35px;
+        }
+
+    
+        button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+    
+            margin: 0;
+            padding: 0.5rem 1rem;
+    
+            font-family: 'Wemakeprice-Bold';
+            font-size: 25px;
+    
+            font-weight: 400;
+            text-align: center;
+            text-decoration: none;
+    
+            display: inline-block;
+            width: auto;
+    
+            border: none;
+            border-radius: 4px;
+            background-color: white;
+        }
+        #userId,
+        #userName,
+        #userEmail,
+        #userPwd,
+        #userRepwd{
+            height: 30px;
+    font-size: 20px;
+    margin-bottom: 1%;
+        }
+        #join{
+            margin-top: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div ><a href="/" class="signuphome">BG</a></div>
+    <!-- <a href="/"><img src="/images/logo-short.png" class="signuphome" ></a> -->
+    <div id="body">
+        <div class="join-form-panel">
+            <div class="signup-title">회원가입</div>
+            <!-- POST방식으로 signup.js에서 /signup에 접근. -->
+            <form name="FORM" action="/signup" method="POST">
+                <div class="join-form">
+                    <div><input type="text"  class="userId" id="userId" autofocus placeholder="ID"  name="userid" required>
+                        <div type="text" id="text-id" class="loginCheck"></div>
+                    </div>
+                    <div><input type="text" id="userName"  placeholder="Name" name="username" required>
+                        <div type="text" id="text-name" class="nameCheck"></div>
+                    </div>
+                    <div><input type="email" id="userEmail" placeholder="Email" name="useremail"required>
+                        <div type="text" id="text-email" class="emailCheck"></div>
+                    </div>
+                    <div><input type="password" id="userPwd" placeholder="Password" name="userpwd"required>
+                        <div type="text" id="text-pwd" class="pwCheck"></div>
+                    </div>
+                    <div><input type="password" id="userRepwd" placeholder="Confirm Password"required>
+                        <div type="text" id="text-repwd" class="repwCheck"></div>
+                    </div>
+                </div>
+                <button id="join" class="submit" onclick="join()">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="/javascripts/signup.js"></script>
+    
+</body>
+
+</html>

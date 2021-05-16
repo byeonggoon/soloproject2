@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/mainfont.css">
+    <style>
+       *{
+    padding: 0;
+    margin: 0;
+}
+body{
+    width: 90%;
+    background-repeat:no-repeat;
+    margin: 2% 5%;
+}
+
+.loginhome{
+    font-family: 'Wemakeprice-Bold';
+    font-size: 60px;
+    text-decoration: none;
+    color: black;
+}
+.menu{
+    font-family: 'Wemakeprice-Bold';
+    text-align: right;
+    font-size: 25px;
+    color: black;
+    font-weight: 800;
+}
+
+.menu ul li{
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: black;
+}
+/* ////////////메인글/////////////////////// */
+
+.userhometitle {
+    font-family: 'Wemakeprice-Bold';
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding: 5% 0;
+    text-decoration: none;
+    color: black;
+}
+.contentbox{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    border: 2px solid black;
+    text-align: center;
+    display: inline-block;
+    margin: 25px 30px;
+    box-shadow: 2px 2px 10px grey;
+
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    -ms-transition: 0.5s;
+    transition: 0.5s;
+}
+.contentbox a{
+    text-decoration: none;
+    color: black;
+}
+.contentbox:hover{
+    -webkit-transform: scale(1.2,1.2);
+    -moz-transform: scale(1.2,1.2);
+    -o-transform: scale(1.2,1.2);
+    -ms-transform: scale(1.2,1.2);
+    transform: scale(1.2,1.2);
+}
+hr{
+    height:10px;
+}
+.stockboardarea{
+    margin: 100px auto ;
+    text-align: center;
+}
+.coinboardarea{
+    text-align: center;
+}
+.areatitle{
+    font-size: 25px;
+    font-family: 'Wemakeprice-Bold';
+    margin-bottom: 25px;
+}
+.titlewidth{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-family: 'Wemakeprice-Bold';
+    margin-bottom: 30px;
+}
+.innerbox{
+    margin-top: 50px;
+}
+.totalpoint{
+    font-family: 'Wemakeprice-Bold';
+    font-size: 20px;
+    text-align: right;
+    margin-right: 150px;
+}
+.pointtitle{
+    font-family: 'Wemakeprice-Bold';
+    font-size: 20px;
+    text-align: right;
+    margin-right: 150px;
+}
+    </style>
+</head>
+
+<body>
+    <div><a href="/" class="loginhome">BG</a></div>
+    <div class="userhometitle">
+        <%=user%>님의 페이지
+    </div>
+    <!-- /////////////////// -->
+    <% data3.forEach((item,index)=>{ %>
+        <div class="totalpoint">적립 포인트 :<%=item.point%> 점</div>
+        
+        <%if(item.point >100){ %>
+            <div class="pointtitle"style="color: rgb(151, 185, 24);">활동왕</div>
+            <% }else if(item.point >70){ %>
+                <div class="pointtitle" style="color: chocolate;">부반장</div>
+                <%} else if (item.point >40) {  %>              
+                    <div class="pointtitle" style="color:rgb(28, 168, 122)">파트라슈</div>      
+                    <%}else {   %>
+                        <div class="pointtitle" style="color:cornflowerblue">전학생</div>
+                        <%}%>
+
+        <% }); %>
+     
+    
+  <!-- /////////////////// -->
+
+    <div class="stockboardarea">
+        <div class="areatitle">주식게시판에 올린글</div>
+        <% data.forEach((item,index)=>{ %>
+            <div class="contentbox"><a href='/stock/detail/<%= item.no %>' >
+                <div class="innerbox">
+                    <div class="titlewidth">
+                            <div>
+                                <%= item.stocktitle %>
+                            </div>
+                        </div>
+                    <div>조회수: <%= item.views %>
+                    </div>
+                    <div>작성일: <%= item.date %>
+                    </div>
+                </div>
+            </a></div>
+            <% }); %>
+    </div>
+
+    <div class="coinboardarea">
+        <div class="areatitle">코인게시판에 올린글</div>
+        <% data2.forEach((item,index)=>{ %>
+            <div class="contentbox"><a href='/coin/detail/<%= item.no %>' >
+                    <div class="innerbox">
+                        <div class="titlewidth">
+                            <div>
+                                <%= item.cointitle %>
+                            </div>
+                        </div>
+                        <div>조회수: <%= item.views %>
+                        </div>
+                        <div>작성일: <%= item.date %>
+                        </div>
+                    </div>
+                </a></div>
+            <% }); %>
+    </div>
+
+    <!-- <script src="/javascripts/mypage.js"></script> -->
+</body>
+</html>

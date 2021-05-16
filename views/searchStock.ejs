@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QNA</title>
+
+</head>
+<body>
+
+
+
+    <div class="qna-panel">
+        <div class="main-title"> QNA</div>
+        <div style="margin-bottom: 12px;margin-top: 12px;">
+            <form action="/searchStock.html/1" method="post"><input type="text" placeholder="제목" name="searchStock"
+                    id="search-panel"><button id="searchbtn">검색</button></form>
+        </div>
+        <div class="board-topline">
+            <div class="topline-detail">No.</div>
+            <div class="topline-detail">제목</div>
+            <div class="topline-detail">작성자</div> 
+          </div>
+        <hr>
+        <hr>
+        <% for(let i=(page * page_num) - page_num;i < (page * page_num);i++){ if(i> leng){
+            i++;
+            }else{
+            var datas = data[i]
+            %>
+            <div class="stock-list">
+                <div class="stock-stockno">
+                    <%=datas.No%><input type="hidden" name="title" value="<%=data[i].No%>">
+                </div>
+                <div class="stock-title"><a href="/stockdetail.ejs/<%=data[i].No%>">
+                        <%=datas.title%>
+                    </a></div>
+                <div class="stock-userid">
+                    <%=datas.writter%>
+                </div>
+            </div>
+            <hr>
+            <% }} %>
+            <div class="num-panel">
+                <% for(var j=0; j < data.length / page_num; j++){ %>
+                  <div class="num" id="<%=j+1%>">[<a href="/searchStock.ejs/<%=search%>/<%= j + 1 %>">
+                      <%= j + 1 %>
+                    </a>]</div>
+                  <% } %>
+                </div>
+                <div onclick="writeForm()" id="write">작성하기</div>
+    </div>
+
+    
+    
+</body>
+</html>

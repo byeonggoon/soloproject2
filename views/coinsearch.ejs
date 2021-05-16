@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG</title>
+    <link rel="stylesheet" href="/stylesheets/mainfont.css">
+    <link rel="stylesheet" href="/stylesheets/coinList.css">
+</head>
+<body>
+
+    <div class="menu">
+        <ul>
+            
+            <li><a href="/stock/1">주식게시판</a></li>
+            <li><a href="/coin/1">코인게시판</a></li>
+            <%if(user==undefined){%>
+            
+                <li><a href="/login" rel="modal:open">로그인</a></li> 
+                <li><a href="/signup" rel="modal:open">회원가입</a></li>
+     
+          <%}else{%>
+                    <li><a href="/mypage"><%=user%>님</a></li>
+                    <li><a href="/logout">logout</a></li>
+                    <%}%>
+        </ul>
+    </div>
+  
+    <div class="BGF"><a href="/" class="BGF">BGFinance</a></div>
+    <div class="coin-panel">
+        <div class="main-title"> 주식게시판</div>
+        <%if(user==undefined){%>
+            <div class="writeenter"><a href="javascript:alert('로그인 후 작성 가능합니다.')" class="writeenter">글쓰기 </a></div>
+            <%}else{%>
+                <div class="writeenter"><a href="/coin/coinwrite"   class="writeenter">글쓰기 </a></div>     
+                <!-- href를 써줄때 /coin/coinwrite를 써줘야 글쓰기로 이동 .coin.js에서는 
+                    app.js에서 /coin으로 해줬기 때문에 '/'만 입력해도 가능했다.  -->
+                <%}%>
+
+        <div style="margin-bottom: 12px;margin-top: 12px;" class="searchbar">
+            <form action="/coin/coinsearch/1" method="post"><input type="text" placeholder="제목" name="coinsearch"
+                    id="search-panel"><button id="searchbtn">검색</button></form>
+        </div>
+      
+        <table >
+            <thead>
+            <tr>
+                <td>No</td>
+                <td class="titlewidth">제목</td>
+                <td>작성자</td>
+                <td>조회수</td>
+                <td>작성일</td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% for(let i=(page * page_num) - page_num; i < (page * page_num); i++){ %>
+                <%if(i> leng){%>
+                    <% i++;%>
+                    <%}else{%>
+                        <% var datas = data[i]%>
+            <tr>
+                <td><%= datas.no %></td>
+                <td class="titlewidth"><a href='/coin/detail/<%= datas.no %>'><div><%= datas.cointitle %></div></a></td>
+                <td><%= datas.userid %></td>
+                <td><%= datas.views %></td>
+                <td><%= datas.date %></td>
+            </tr>
+            <% } } %>
+            </tbody>
+        </table>
+       
+        <div class="num-panel">
+                <% for(var j=0; j < data.length / page_num; j++){ %>
+                  <div class="num" id="<%=j+1%>"><a href="/coin/coinsearch/<%=search%>/<%= j + 1 %>">
+                      <%= j + 1 %>
+                    </a></div>
+                  <% } %>
+            </div>
+       
+    
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>modify</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+   
+    <link rel="stylesheet" href="/stylesheets/mainfont.css">
+    <style>
+        .BGF {
+            font-family: 'Wemakeprice-Bold';
+            text-align: center;
+            font-size: 65px;
+            font-weight: bold;
+            padding: 2% 0;
+            text-decoration: none;
+            color: black;
+        }
+        .coin-coinno {
+            display: inline-block;
+            font-size: 15px;
+        }
+        #DN{
+            display: inline-block;
+            font-size: 15px;
+        }
+    
+        .BGF:link {
+            color: black;
+            text-decoration: none;
+        }
+        .coin-update-panel {
+            width: 650px;
+            margin: auto;
+            vertical-align: middle;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .buttons {
+            text-align: center;
+        }
+
+        .button {
+            font-family: 'Wemakeprice-Bold';
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 15px;
+            color: black;
+            font-size: 20px;
+        }
+        .button:hover {
+            font-weight: bold;
+        }
+
+        .cointit,
+        .coin-userid {
+            font-family: 'Wemakeprice-Bold';
+            color: black;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+
+        
+        .coincon {
+            margin-bottom: 40px;
+            font-size: 20px;
+        }
+     
+    </style>
+</head>
+
+
+<body>
+    <div class="BGF"><a href="/" class="BGF">BGFinance</a></div>
+    
+    <div class="coin-update-panel">
+        <form  method="POST" name="updateForm">
+            <div class="coin-coinno" disabled>No : <div id="DN"><%=data[0].no%></div> <input type="hidden" value="<%=data[0].no%>"
+                        name="No">
+            </div>
+            <div class="cointit">글 제목 : <input class="coin-title" id="tit" value="<%=data[0].cointitle%>" name="cointitle">
+            </div>
+            <div class="coin-userid" disabled>작성자 : <%=data[0].userid%>
+            </div>
+            <div class="coincon"><br><textarea name="coincontent" class="coin-content" id="article"cols="95"
+                    rows="10"><%=data[0].coincontent%></textarea></div>
+
+                </form>
+                <div class="buttons">
+                    <div onclick="update()" class="button">수정하기</div>
+                    <div onclick="history.back()" class="button">뒤로가기</div>
+                </div>
+    </div>
+    
+    
+
+
+    
+<script>
+    $(document).ready(function() {
+        $('#article').summernote({
+            width:600,
+             height: 250,                 // 에디터 높이
+              minHeight: 250,             // 최소 높이
+              maxHeight: 250,             // 최대 높이
+            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR",                    // 한글 설정
+            placeholder: '내용을 입력해주세요',    //placeholder 설정
+            callbacks: {    //여기 부분이 이미지를 첨부하는 부분
+                      onImageUpload : function(files) {
+                        uploadSummernoteImageFile(files[0],this);
+                    },
+                    onPaste: function (e) {
+                        let clipboardData = e.originalEvent.clipboardData;
+                        if (clipboardData && clipboardData.items && clipboardData.items.length) {
+                            let item = clipboardData.items[0];
+                            if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                } 
+        });
+    });
+    function uploadSummernoteImageFile(file, editor) {
+        data = new FormData();
+        data.append("file", file);
+        $.ajax({
+            data : data,
+            type : "POST",
+            url : "/uploadSummernoteImageFile",
+            contentType : false,
+            processData : false,
+            success : function(data) {
+                //항상 업로드된 파일의 url이 있어야 한다.
+                $(editor).summernote('insertImage', data.url);
+            }
+        });
+    }
+
+</script>
+    <script>
+        function update() {
+                var con = confirm('수정하시겠습니까?');
+                if (con == true) {
+                    const noText = document.getElementById('DN').innerText
+                    //coin-coinno안에 내용을 가져와서
+                    updateForm.action = '/coin/update/'+noText ;
+                    updateForm.submit();
+                }else {
+                alert('제목과 내용을 입력부탁드립니다.')
+            }
+        }
+    </script>
+</body>
